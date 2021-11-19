@@ -8,7 +8,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] Text quizQuestionText;
     [SerializeField] Transform quizQuestionsParent;
     [SerializeField] Button[] quizButtons;
-    [SerializeField] int buttonsInOneRow = 2;
+    [SerializeField] int buttonsInOneRow = 2, buttonRowAmount = 2;
     QuizQuestion currentQuestion = null;
     
     int currentPlayerIndex = 0;
@@ -69,7 +69,7 @@ public class QuizManager : MonoBehaviour
 
     public void ChangeButtonFocus(Vector2Int to)
     {
-        if (to.x > -1 && to.y > -1 && to.x < buttonsInOneRow && to.y < 2)
+        if (to.x > -1 && to.y > -1 && to.x < buttonsInOneRow && to.y < buttonRowAmount)
         {
             quizButtons[focusedButtonPos.x + focusedButtonPos.y * buttonsInOneRow].GetComponent<Image>().color = Color.white;
             focusedButtonPos = to;

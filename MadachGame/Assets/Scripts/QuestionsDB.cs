@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class QuestionsDB
 {
-    const int NotSceneRelated = 16;
+    public const int NotSceneRelated = 16;
 
     public static Dictionary<int, QuizQuestion[]> questions = new Dictionary<int, QuizQuestion[]>()
     {
