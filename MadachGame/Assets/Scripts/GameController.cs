@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
         {
             instance = this;
             playersToMove = players;
+            quizManager = FindObjectOfType<QuizManager>();
             StartCoroutine(GameLoop());
         }
     }

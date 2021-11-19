@@ -4,7 +4,9 @@ using UnityEngine;
 
 public static class QuestionsDB
 {
-    public static Dictionary<int, QuizQuestion[]> sceneQuestions = new Dictionary<int, QuizQuestion[]>()
+    const int NotSceneRelated = 16;
+
+    public static Dictionary<int, QuizQuestion[]> questions = new Dictionary<int, QuizQuestion[]>()
     {
         [0] = {},
         [1] = {},
@@ -21,11 +23,12 @@ public static class QuestionsDB
         [12] = {},
         [13] = {},
         [14] = {},
-        [15] = {}
+        [15] = {},
+        [NotSceneRelated] = { }
     };
 
     public static QuizQuestion GetQuestionFor(int sceneIndex)
     {
-        return sceneQuestions[sceneIndex][Random.Range(0, sceneQuestions[sceneIndex].Length)];
+        return questions[sceneIndex][Random.Range(0, questions[sceneIndex].Length)];
     }
 }

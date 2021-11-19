@@ -24,8 +24,18 @@ public class TileField : MonoBehaviour
         {
             GameObject tileObj = Instantiate(tileSample.gameObject);
             Tile tile = tileObj.GetComponent<Tile>();
-            tile.sceneIndex = Random.Range(0, 16);
+
+            if (i % 7 == 0)
+            {
+                tile.sceneIndex = 16;
+            }
+            else
+            {
+                tile.sceneIndex = Random.Range(0, 16);
+            }
+
             tile.transform.parent = this.gameObject.transform;
+            tile.transform.position += new Vector3(i * 0.01f, 0);
             tiles[i] = tile;
             
             // Set position
