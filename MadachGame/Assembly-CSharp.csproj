@@ -56,12 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\QuizManager.cs" />
-    <Compile Include="Assets\Scripts\QuestionsDB.cs" />
-    <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\QuizButton.cs" />
-    <Compile Include="Assets\Scripts\TileField.cs" />
+    <Compile Include="Assets\Scripts\QuizQuestion.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
+    <Compile Include="Assets\Scripts\TileField.cs" />
+    <Compile Include="Assets\Scripts\QuestionsDB.cs" />
+    <Compile Include="Assets\Scripts\DiceRoller.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

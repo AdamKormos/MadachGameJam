@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int currentTileIndex = 0;
+    [HideInInspector] public int score = 0;
+    [HideInInspector] public int currentTileIndex = 0;
+    static int playerCounter = 0;
+    public int playerIndex = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        playerIndex = playerCounter;
+        playerCounter++;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void RollDice()
-    {
-        int diceResult = 5;
-        OnTileEnter(currentTileIndex + diceResult);
-    }
-
-    private void OnTileEnter(int tileIndex)
+    public void MoveToTileAt(int tileIndex)
     {
         currentTileIndex = tileIndex;
         if(currentTileIndex > TileField.tiles.Length)
         {
             // Reached start again
+            transform.position = TileField.tiles[0].transform.position;
+            GameController.instance.playersToMove.Remove(this);
+        }
+        else
+        {
+            transform.position = TileField.tiles[currentTileIndex].transform.position;
         }
     }
 }

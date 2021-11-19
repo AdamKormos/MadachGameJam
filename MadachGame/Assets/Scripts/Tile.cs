@@ -8,6 +8,6 @@ public class Tile : MonoBehaviour
 
     public void LoadArt()
     {
-
+        // GetComponent<SpriteRenderer>().sprite.texture = ;
     }
 }

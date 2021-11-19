@@ -8,13 +8,10 @@ public class QuizManager : MonoBehaviour
     [SerializeField] Text quizQuestionText;
     [SerializeField] Transform quizQuestionsParent;
     [SerializeField] Button[] quizButtons;
-    [SerializeField] Text[] playerScoreTexts;
     [SerializeField] int buttonsInOneRow = 2;
-    bool isQuizActive = false;
     QuizQuestion currentQuestion = null;
     
     int currentPlayerIndex = 0;
-    int[] playerScores = new int[2] { 0, 0 };
 
     public void Start()
     {
@@ -26,7 +23,7 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isQuizActive) // Temp false
+        if (!GameController.isQuizActive) // Temp false
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -57,7 +54,7 @@ public class QuizManager : MonoBehaviour
         int answerIndex = focusedButtonPos.x + focusedButtonPos.y * buttonsInOneRow;
         if(currentQuestion.correctAnswerIndex == answerIndex)
         {
-            UpdatePlayerScore(currentPlayerIndex, playerScores[currentPlayerIndex] + 1);
+            GameController.UpdatePlayerScore(currentPlayerIndex, GameController.instance.players[currentPlayerIndex].score + 1);
         }
         else
         {
@@ -100,11 +97,5 @@ public class QuizManager : MonoBehaviour
                 quizButtons[i].gameObject.SetActive(false);
             }
         }
-    }
-
-    private void UpdatePlayerScore(int playerIndex, int amount)
-    {
-        playerScores[playerIndex] = amount;
-        playerScoreTexts[playerIndex].text = amount.ToString();
     }
 }
