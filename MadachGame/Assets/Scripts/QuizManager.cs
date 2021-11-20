@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class QuizManager : MonoBehaviour
 {
     [SerializeField] Text quizQuestionText;
+    [SerializeField] Image quizQuestionSceneImage;
     [SerializeField] Transform quizQuestionsParent;
     [SerializeField] Text playerNameAboveQuizText;
     [SerializeField] Button[] quizButtons;
@@ -112,6 +113,7 @@ public class QuizManager : MonoBehaviour
         currentQuestion = QuestionsDB.GetQuestionFor(quizSceneIndex);
         int answerCount = currentQuestion.answers.Length;
         quizQuestionText.text = currentQuestion.question;
+        quizQuestionSceneImage.sprite = Resources.Load("test-tile", typeof(Sprite)) as Sprite;
 
         playerNameAboveQuizText.text = ((GameController.Names)targetPlayerIndex).ToString() + " kérdése:";
         playerNameAboveQuizText.color = new Color(playerNameAboveQuizText.color.r, playerNameAboveQuizText.color.g, playerNameAboveQuizText.color.b, 1f);
