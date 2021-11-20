@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("SessionMatchCount", PlayerPrefs.GetInt("SessionMatchCount", 0) + 1);
                 Destroy(this.gameObject);
             }
+            // UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            // PlayerPrefs.SetInt("SessionMatchCount", PlayerPrefs.GetInt("SessionMatchCount", 0) + 1);
         }
         else if(isGameStartPanelOn)
         {
@@ -104,7 +106,7 @@ public class GameController : MonoBehaviour
                 if (!player.reachedEnd)
                 {
                     // quizManager.LoadNextQuiz(TileField.tiles[player.currentTileIndex].sceneIndex, player.playerIndex);
-                    quizManager.LoadNextQuiz(Random.Range(0, 18), player.playerIndex);
+                    quizManager.LoadNextQuiz(player.playerIndex);
                     while (isQuizActive)
                     {
                         yield return new WaitForSeconds(0.1f);

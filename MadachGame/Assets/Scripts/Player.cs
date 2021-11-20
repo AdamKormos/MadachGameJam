@@ -29,12 +29,14 @@ public class Player : MonoBehaviour
 
         if(tileIndex >= TileField.tiles.Length) // Reached start again
         {
-            distance = TileField.tiles.Length - tileIndex;
+            distance = TileField.tiles.Length - currentTileIndex;
         }
 
         for (int i = 0; i < distance; i++)
         {
             currentTileIndex++;
+            if (currentTileIndex >= TileField.tiles.Length) currentTileIndex = 0;
+
             transform.position = TileField.tiles[currentTileIndex].transform.position;
             yield return new WaitForSeconds(0.5f);
         }

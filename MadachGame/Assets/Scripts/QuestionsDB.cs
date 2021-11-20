@@ -8,10 +8,17 @@ public static class QuestionsDB
     public const int Memoriter = 17;
 
     public static List<QuizQuestion>[] questions = new List<QuizQuestion>[18];
+    public static List<QuizQuestion>[] usableQuestions = new List<QuizQuestion>[18];
 
 
     public static void FillDB()
     {
+        AddQuestion(0, "Körülbelül mennyi idő alatt írta meg Madách a művet?", 1, new string[] { "3 év", "1 év", "1 évtized", "5 év" });
+        AddQuestion(0, "Mihez hasonlította Arany elhamarkodottan a művet?", 0, new string[] { "Faust", "Rómeó és Júlia", "Egri Csillagok", "Antigoné" });
+        AddQuestion(0, "Melyik NEM jelenik meg a műben?", 3, new string[] { "Eleve elrendeltség", "Hegeli dialektika", "Fagyhalál elmélet", "Ateizmus" });
+        AddQuestion(0, "Mire szánta Madách a művet?", 1, new string[] { "Színdarabokra", "Olvasásra" });
+        AddQuestion(0, "Mi a mű műfaja?", 0, new string[] { "Drámai költemény", "Eposz", "Epikus dráma", "Elégia" });
+        
         AddQuestion(1, "Lucifer szembefordul az Úrral", 0, new string[] { "Igaz", "Hamis" });
         AddQuestion(1, "Minek a fáját adta Isten Lucifernek?", 2, new string[] { "Kételkedés és halhatatlanság", "Tudás és tagadás", "Tudás és halhatatlanság", "Becsmérlés és tagadás" });
         AddQuestion(1, "Mit hajt végre ebben a színben Lucifer?", 1, new string[] { "Csatlakozik az angyalokhoz", "Kiválik az angyaloktól", "Behódol Istennek" });
@@ -33,6 +40,20 @@ public static class QuestionsDB
         AddQuestion(5, "Kinek a formájában jelenik meg Ádám?", 2, new string[] { "Periklész", "Platón", "Miltiádész", "Danton" });
         AddQuestion(5, "Milyen sorsa jut Ádám?", 1, new string[] { "Boldogság a családjával", "Lefejezés", "Levágják a kezét", "A nép dicsőíti" });
 
+        AddQuestion(6, "Mit érez Ádám és Éva a színben?", 0, new string[] { "Boldogtalanság", "Semleges hangulat", "Elégedettség", "Öröm" });
+        AddQuestion(6, "Ki kezd el új eszméket hirdetni a szín végén?", 1, new string[] { "Szent Péter", "Péter apostol", "Pál apostol", "Ádám" });
+        AddQuestion(6, "Mit jelent a hedonizmus?", 0, new string[] { "Eszmék nélküli világ", "Több eszmével teli világ", "Vallásiasság", "Népuralom" });
+
+
+        for (int i = 0; i < questions.Length; i++)
+        {
+            if (questions[i] == null) continue;
+            usableQuestions[i] = new List<QuizQuestion>();
+            foreach(QuizQuestion question in questions[i])
+            {
+                usableQuestions[i].Add(question);
+            }
+        }
     }
 
 
@@ -47,9 +68,20 @@ public static class QuestionsDB
     }
 
 
-    public static QuizQuestion GetQuestionFor(int sceneIndex)
+    public static QuizQuestion GetQuestion()
     {
-        sceneIndex = Random.Range(1, 6);
-        return questions[sceneIndex][Random.Range(0, questions[sceneIndex].Count)];
+        int sceneIndex = Random.Range(0, 6); // Temporary -- will be Random.Range(0, 18)
+        if (usableQuestions[sceneIndex].Count == 0)
+        {
+            foreach (QuizQuestion q in questions[sceneIndex])
+            {
+                usableQuestions[sceneIndex].Add(q);
+            }
+        }
+
+        int questionIndex = Random.Range(0, usableQuestions[sceneIndex].Count);
+        QuizQuestion question = usableQuestions[sceneIndex][questionIndex];
+        usableQuestions[sceneIndex].Remove(question);
+        return question;
     }
 }

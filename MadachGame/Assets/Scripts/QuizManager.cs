@@ -103,14 +103,14 @@ public class QuizManager : MonoBehaviour
     }
 
 
-    public void LoadNextQuiz(int quizSceneIndex, int targetPlayerIndex)
+    public void LoadNextQuiz(int targetPlayerIndex)
     {
         GameController.isQuizActive = true;
         gameObject.SetActive(true);
         ChangeButtonFocus(new Vector2Int(0, 0));
 
         currentPlayerIndex = targetPlayerIndex;
-        currentQuestion = QuestionsDB.GetQuestionFor(quizSceneIndex);
+        currentQuestion = QuestionsDB.GetQuestion();
         int answerCount = currentQuestion.answers.Length;
         quizQuestionText.text = currentQuestion.question;
         quizQuestionSceneImage.sprite = Resources.Load("test-tile", typeof(Sprite)) as Sprite;
@@ -131,6 +131,8 @@ public class QuizManager : MonoBehaviour
                 quizButtons[i].gameObject.SetActive(false);
             }
         }
+
+        // StartCoroutine(SubmitAnswer());
     }
     
     private IEnumerator NameTextFadeInAndOut()
