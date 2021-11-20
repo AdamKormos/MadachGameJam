@@ -6,23 +6,44 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public QuizManager quizManager;
+    public Text gameEvaluationText;
     public Text[] playerScoreTexts;
     public List<Player> players;
-    public bool isDiceRollingNow = false;
+    public bool isDiceRollingNow = false, isEvaluationPanelOn = false;
     public static bool isQuizActive = false;
     public static GameController instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
+        instance = this;
+        instance.gameEvaluationText.transform.parent.gameObject.SetActive(false);
+
+        for(int i = 0; i < players.Count; i++)
         {
-            instance = this;
-            QuestionsDB.FillDB();
-            StartCoroutine(GameLoop());
+            players[i].playerIndex = i;
         }
+
+        QuestionsDB.FillDB();
+        StartCoroutine(GameLoop());
     }
 
+
+    private void Update()
+    {
+        if(isEvaluationPanelOn)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+            else if(Input.GetKeyDown(KeyCode.Return))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                Destroy(this.gameObject);
+            }
+        }
+    }
 
     private IEnumerator GameLoop()
     {
@@ -44,7 +65,7 @@ public class GameController : MonoBehaviour
                 }
                 yield return new WaitForSeconds(0.1f);
 
-                int diceRollResult = 4;
+                int diceRollResult = Random.Range(1, 7);
 
                 player.MoveToTileAt(player.currentTileIndex + diceRollResult);
 
@@ -72,17 +93,20 @@ public class GameController : MonoBehaviour
 
     public static void EvaluateGame()
     {
+        instance.gameEvaluationText.transform.parent.gameObject.SetActive(true);
+        instance.isEvaluationPanelOn = true;
+
         if (instance.players[0].score > instance.players[1].score)
         {
-            Debug.Log("Ádám");
+            instance.gameEvaluationText.text = "Ádám nyert!";
         }
         else if (instance.players[0].score < instance.players[1].score)
         {
-            Debug.Log("Lucifer");
+            instance.gameEvaluationText.text = "Lucifer nyert!";
         }
         else
         {
-            Debug.Log("Döntetlen");
+            instance.gameEvaluationText.text = "A játszma döntetlen";
         }
     }
 }

@@ -71,7 +71,8 @@ public class QuizManager : MonoBehaviour
 
     public void ChangeButtonFocus(Vector2Int to)
     {
-        if (to.x > -1 && to.y > -1 && to.x < buttonsInOneRow && to.y < buttonRowAmount)
+        if (to.x > -1 && to.y > -1 && to.x < buttonsInOneRow && to.y < buttonRowAmount 
+            && quizButtons[to.x + to.y * buttonsInOneRow].gameObject.activeSelf)
         {
             quizButtons[focusedButtonPos.x + focusedButtonPos.y * buttonsInOneRow].GetComponent<Image>().color = Color.white;
             focusedButtonPos = to;
@@ -84,6 +85,7 @@ public class QuizManager : MonoBehaviour
     {
         GameController.isQuizActive = true;
         gameObject.SetActive(true);
+        ChangeButtonFocus(new Vector2Int(0, 0));
 
         currentPlayerIndex = targetPlayerIndex;
         currentQuestion = QuestionsDB.GetQuestionFor(quizSceneIndex);

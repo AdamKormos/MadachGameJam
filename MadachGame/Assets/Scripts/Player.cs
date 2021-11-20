@@ -6,17 +6,13 @@ public class Player : MonoBehaviour
 {
     [HideInInspector] public int score = 0;
     [HideInInspector] public int currentTileIndex = 0;
-    static int playerCounter = 0;
     public int playerIndex = 0;
     public bool reachedEnd = false;
 
     private void Start()
     {
-        playerIndex = playerCounter;
-        playerCounter++;
         MoveToTileAt(currentTileIndex);
     }
-
 
     private void Update()
     {
