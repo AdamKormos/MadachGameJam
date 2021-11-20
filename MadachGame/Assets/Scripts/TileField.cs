@@ -43,25 +43,35 @@ public class TileField : MonoBehaviour
 
             tile.LoadArt();
         }
+        tileSample.gameObject.SetActive(false);
 
         for(int i = 0; i < tiles.Length; i++)
         {
+            Vector3 additionalOffset = new Vector3();
+            float rotationAngle = 0f;
             if(i < 8)
             {
-                tiles[i].transform.position = tilesBottomLeftCornerPos.position + new Vector3(TileOffset().x * 7, TileOffset().y * (i % 8));
+                additionalOffset = new Vector3(TileOffset().x * (tilesPerRow - 1), TileOffset().y * (i % tilesPerRow));
+                rotationAngle = 90f;
             }
             else if(i < 15)
             {
-                tiles[i].transform.position = tilesBottomLeftCornerPos.position + new Vector3(TileOffset().x * (6 - (i % 8)), TileOffset().y * 7);
+                int tempI = i - (tilesPerRow - 1);
+                additionalOffset = (TileOffset() * (tilesPerRow - 1)) - new Vector3(TileOffset().x * tempI, 0f);
+                rotationAngle = 180f;
             }
             else if(i < 21)
             {
-                tiles[i].transform.position = tilesBottomLeftCornerPos.position + new Vector3(0f, TileOffset().y * 7 + -TileOffset().y * (i % 7));
+                additionalOffset = new Vector3(0f, (TileOffset().y * (tilesPerRow - 1)) - TileOffset().y * (i % (tilesPerRow - 1)));
+                rotationAngle = 270f;
             }
             else
             {
-                tiles[i].transform.position = tilesBottomLeftCornerPos.position + new Vector3(TileOffset().x * (i % 7), 0f);
+                additionalOffset = new Vector3(TileOffset().x * (i % (tilesPerRow - 1)), 0f);
             }
+
+            tiles[i].transform.position = tilesBottomLeftCornerPos.position + additionalOffset;
+            tiles[i].transform.rotation = Quaternion.Euler(0f, 0f, rotationAngle);
         }
     }
 

@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     public QuizManager quizManager;
     public Text[] playerScoreTexts;
     public List<Player> players;
-    public List<Player> playersToMove = new List<Player>();
     public bool isDiceRollingNow = false;
     public static bool isQuizActive = false;
     public static GameController instance;
@@ -19,8 +18,7 @@ public class GameController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            playersToMove = players;
-            quizManager = FindObjectOfType<QuizManager>();
+            QuestionsDB.FillDB();
             StartCoroutine(GameLoop());
         }
     }
@@ -28,22 +26,36 @@ public class GameController : MonoBehaviour
 
     private IEnumerator GameLoop()
     {
-        while (instance.playersToMove.Count > 0)
+        int activePlayerCount = players.Count;
+        while (activePlayerCount > 0)
         {
-            foreach (Player player in instance.playersToMove)
+            activePlayerCount = players.Count;
+            foreach (Player player in players)
             {
+                if(player.reachedEnd)
+                {
+                    activePlayerCount--;
+                    continue;
+                }
+
                 while (isDiceRollingNow) // To toggle later when dice is added and such. Point is to wait till dice finishes moving, and then move the player.
                 {
-                    yield return new WaitForEndOfFrame();
+                    yield return new WaitForSeconds(0.1f);
                 }
+                yield return new WaitForSeconds(0.1f);
+
                 int diceRollResult = 4;
 
                 player.MoveToTileAt(player.currentTileIndex + diceRollResult);
 
-                quizManager.LoadNextQuiz(TileField.tiles[player.currentTileIndex].sceneIndex, player.playerIndex);
-                while(isQuizActive)
+                if (!player.reachedEnd)
                 {
-                    yield return new WaitForEndOfFrame();
+                    quizManager.LoadNextQuiz(TileField.tiles[player.currentTileIndex].sceneIndex, player.playerIndex);
+                    while (isQuizActive)
+                    {
+                        yield return new WaitForSeconds(0.1f);
+                    }
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
         }

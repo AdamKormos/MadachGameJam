@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public int currentTileIndex = 0;
     static int playerCounter = 0;
     public int playerIndex = 0;
+    public bool reachedEnd = false;
 
     private void Start()
     {
@@ -28,11 +29,10 @@ public class Player : MonoBehaviour
     public void MoveToTileAt(int tileIndex)
     {
         currentTileIndex = tileIndex;
-        if(currentTileIndex > TileField.tiles.Length)
+        if(currentTileIndex >= TileField.tiles.Length) // Reached start again
         {
-            // Reached start again
             transform.position = TileField.tiles[0].transform.position;
-            GameController.instance.playersToMove.Remove(this);
+            reachedEnd = true;
         }
         else
         {

@@ -156,6 +156,7 @@ MonoBehaviour:
   score: 0
   currentTileIndex: 0
   playerIndex: 0
+  reachedEnd: 0
 --- !u!212 &278349645
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -581,6 +582,7 @@ MonoBehaviour:
   score: 0
   currentTileIndex: 0
   playerIndex: 0
+  reachedEnd: 0
 --- !u!1 &683764125
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,14 +770,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794701663b09dd047bcb32c938f6e868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quizManager: {fileID: 0}
+  quizManager: {fileID: 1271723153}
   playerScoreTexts:
   - {fileID: 1194181366}
   - {fileID: 683764127}
   players:
   - {fileID: 580287630}
   - {fileID: 278349644}
-  playersToMove: []
   isDiceRollingNow: 0
 --- !u!4 &952527884
 Transform:

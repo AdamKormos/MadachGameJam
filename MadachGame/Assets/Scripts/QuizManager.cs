@@ -15,6 +15,7 @@ public class QuizManager : MonoBehaviour
 
     public void Start()
     {
+        AbortQuiz();
         ChangeButtonFocus(focusedButtonPos);
     }
 
@@ -23,7 +24,7 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
-        if (!GameController.isQuizActive) // Temp false
+        if (GameController.isQuizActive) // Temp false
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -64,6 +65,7 @@ public class QuizManager : MonoBehaviour
 
     private void AbortQuiz()
     {
+        GameController.isQuizActive = false;
         gameObject.SetActive(false);
     }
 
@@ -80,6 +82,9 @@ public class QuizManager : MonoBehaviour
 
     public void LoadNextQuiz(int quizSceneIndex, int targetPlayerIndex)
     {
+        GameController.isQuizActive = true;
+        gameObject.SetActive(true);
+
         currentPlayerIndex = targetPlayerIndex;
         currentQuestion = QuestionsDB.GetQuestionFor(quizSceneIndex);
         int answerCount = currentQuestion.answers.Length;
