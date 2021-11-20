@@ -32,7 +32,7 @@ public class TileField : MonoBehaviour
             }
             else
             {
-                tile.sceneIndex = Random.Range(0, 16);
+                tile.sceneIndex = Random.Range(1, 17);
             }
 
             tile.transform.parent = this.gameObject.transform;
@@ -77,6 +77,8 @@ public class TileField : MonoBehaviour
 
     private Vector3 TileOffset()
     {
-        return tileSample.GetComponent<SpriteRenderer>().size * 1.1f * tileSample.transform.lossyScale;
+        return new Vector3(tileSample.GetComponent<SpriteRenderer>().bounds.size.x * tileSample.transform.lossyScale.x * 1.8f,
+                 tileSample.GetComponent<SpriteRenderer>().bounds.size.y * tileSample.transform.lossyScale.y * 1.2f,
+                 tileSample.GetComponent<SpriteRenderer>().bounds.size.z * tileSample.transform.lossyScale.z);
     }
 }

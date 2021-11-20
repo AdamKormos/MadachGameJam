@@ -7,6 +7,7 @@ public class QuizManager : MonoBehaviour
 {
     [SerializeField] Text quizQuestionText;
     [SerializeField] Transform quizQuestionsParent;
+    [SerializeField] Text playerNameAboveQuizText;
     [SerializeField] Button[] quizButtons;
     [SerializeField] int buttonsInOneRow = 2, buttonRowAmount = 2;
     QuizQuestion currentQuestion = null;
@@ -44,16 +45,30 @@ public class QuizManager : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.Return))
             {
-                SubmitAnswer();
-                AbortQuiz();
+                StartCoroutine(SubmitAnswer());
             }
         }
     }
 
-    private void SubmitAnswer()
+    private IEnumerator SubmitAnswer()
     {
         int answerIndex = focusedButtonPos.x + focusedButtonPos.y * buttonsInOneRow;
-        if(currentQuestion.correctAnswerIndex == answerIndex)
+        bool gotCorrectAnswer = (currentQuestion.correctAnswerIndex == answerIndex);
+
+        if(!gotCorrectAnswer)
+        {
+            quizButtons[answerIndex].GetComponent<Image>().color = Color.red;
+        }
+
+        for (int i = 0; i < 7; i++)
+        {
+            quizButtons[currentQuestion.correctAnswerIndex].GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.15f);
+            quizButtons[currentQuestion.correctAnswerIndex].GetComponent<Image>().color = Color.green;
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        if (gotCorrectAnswer)
         {
             GameController.UpdatePlayerScore(currentPlayerIndex, GameController.instance.players[currentPlayerIndex].score + 1);
         }
@@ -61,6 +76,12 @@ public class QuizManager : MonoBehaviour
         {
 
         }
+
+        foreach(Button button in quizButtons)
+        {
+            button.GetComponent<Image>().color = Color.white;
+        }
+        AbortQuiz();
     }
 
     private void AbortQuiz()
@@ -90,9 +111,13 @@ public class QuizManager : MonoBehaviour
         currentPlayerIndex = targetPlayerIndex;
         currentQuestion = QuestionsDB.GetQuestionFor(quizSceneIndex);
         int answerCount = currentQuestion.answers.Length;
-        quizQuestionText.text = currentQuestion.answers[currentQuestion.correctAnswerIndex];
+        quizQuestionText.text = currentQuestion.question;
 
-        for(int i = 0; i < quizButtons.Length; i++)
+        playerNameAboveQuizText.text = ((GameController.Names)targetPlayerIndex).ToString() + " kérdése:";
+        playerNameAboveQuizText.color = new Color(playerNameAboveQuizText.color.r, playerNameAboveQuizText.color.g, playerNameAboveQuizText.color.b, 1f);
+        StartCoroutine(NameTextFadeInAndOut());
+
+        for (int i = 0; i < quizButtons.Length; i++)
         {
             if(i < answerCount)
             {
@@ -104,5 +129,24 @@ public class QuizManager : MonoBehaviour
                 quizButtons[i].gameObject.SetActive(false);
             }
         }
+    }
+    
+    private IEnumerator NameTextFadeInAndOut()
+    {
+        while (GameController.isQuizActive)
+        {
+            for(int i = 0; i < 15; i++)
+            {
+                playerNameAboveQuizText.color -= new Color(0f, 0f, 0f, 1f / 20);
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            for (int i = 0; i < 15; i++)
+            {
+                playerNameAboveQuizText.color += new Color(0f, 0f, 0f, 1f / 20);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        playerNameAboveQuizText.gameObject.SetActive(false);
     }
 }

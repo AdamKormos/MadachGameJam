@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameController : MonoBehaviour
 {
+    public enum Names { Ádám, Lucifer};
+
     public QuizManager quizManager;
     public Text gameEvaluationText;
+    public GameObject gameStartPanelParent;
     public Text[] playerScoreTexts;
     public List<Player> players;
-    public bool isDiceRollingNow = false, isEvaluationPanelOn = false;
+    public bool isDiceRollingNow = false, isEvaluationPanelOn = false, isGameStartPanelOn = false;
     public static bool isQuizActive = false;
     public static GameController instance;
 
@@ -18,6 +22,9 @@ public class GameController : MonoBehaviour
     {
         instance = this;
         instance.gameEvaluationText.transform.parent.gameObject.SetActive(false);
+
+        isGameStartPanelOn = (PlayerPrefs.GetInt("SessionMatchCount", 0) == 0);
+        gameStartPanelParent.SetActive(isGameStartPanelOn);
 
         for(int i = 0; i < players.Count; i++)
         {
@@ -28,7 +35,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(GameLoop());
     }
 
-
     private void Update()
     {
         if(isEvaluationPanelOn)
@@ -36,17 +42,38 @@ public class GameController : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 Application.Quit();
+                PlayerPrefs.SetInt("SessionMatchCount", 0);
             }
             else if(Input.GetKeyDown(KeyCode.Return))
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                PlayerPrefs.SetInt("SessionMatchCount", PlayerPrefs.GetInt("SessionMatchCount", 0) + 1);
                 Destroy(this.gameObject);
+            }
+        }
+        else if(isGameStartPanelOn)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                isGameStartPanelOn = false;
+                gameStartPanelParent.SetActive(false);
             }
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("SessionMatchCount", 0);
+    }
+
     private IEnumerator GameLoop()
     {
+        while(isGameStartPanelOn)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(0.3f);
+
         int activePlayerCount = players.Count;
         while (activePlayerCount > 0)
         {
@@ -63,7 +90,7 @@ public class GameController : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.1f);
                 }
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.3f);
 
                 int diceRollResult = Random.Range(1, 7);
 
@@ -76,7 +103,7 @@ public class GameController : MonoBehaviour
                     {
                         yield return new WaitForSeconds(0.1f);
                     }
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
         }
