@@ -93,12 +93,18 @@ public class GameController : MonoBehaviour
                 yield return new WaitForSeconds(0.3f);
 
                 int diceRollResult = Random.Range(1, 7);
+                // Debug.Log(diceRollResult);
 
-                player.MoveToTileAt(player.currentTileIndex + diceRollResult);
+                StartCoroutine(player.MoveToTileAt(player.currentTileIndex + diceRollResult));
+                while(player.isMoving)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
 
                 if (!player.reachedEnd)
                 {
-                    quizManager.LoadNextQuiz(TileField.tiles[player.currentTileIndex].sceneIndex, player.playerIndex);
+                    // quizManager.LoadNextQuiz(TileField.tiles[player.currentTileIndex].sceneIndex, player.playerIndex);
+                    quizManager.LoadNextQuiz(Random.Range(0, 18), player.playerIndex);
                     while (isQuizActive)
                     {
                         yield return new WaitForSeconds(0.1f);

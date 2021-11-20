@@ -5,8 +5,9 @@ using UnityEngine;
 public static class QuestionsDB
 {
     public const int NotSceneRelated = 0;
+    public const int Memoriter = 17;
 
-    public static List<QuizQuestion>[] questions = new List<QuizQuestion>[17];
+    public static List<QuizQuestion>[] questions = new List<QuizQuestion>[18];
 
 
     public static void FillDB()

@@ -26,6 +26,7 @@ public class TileField : MonoBehaviour
             GameObject tileObj = Instantiate(tileSample.gameObject);
             Tile tile = tileObj.GetComponent<Tile>();
 
+            /*
             if (i % 7 == 0)
             {
                 tile.sceneIndex = QuestionsDB.NotSceneRelated;
@@ -34,6 +35,7 @@ public class TileField : MonoBehaviour
             {
                 tile.sceneIndex = Random.Range(1, 17);
             }
+            */
 
             tile.transform.parent = this.gameObject.transform;
             tile.name = "Tile #" + i.ToString();
@@ -41,7 +43,7 @@ public class TileField : MonoBehaviour
             
             // Set position
 
-            tile.LoadArt();
+            // tile.LoadArt();
         }
         tileSample.gameObject.SetActive(false);
 
