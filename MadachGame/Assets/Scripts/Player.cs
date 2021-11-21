@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(MoveToTileAt(currentTileIndex));
+        transform.position = TileField.tiles[currentTileIndex].transform.position;
     }
 
     private void Update()
@@ -39,6 +39,15 @@ public class Player : MonoBehaviour
 
             transform.position = TileField.tiles[currentTileIndex].transform.position;
             yield return new WaitForSeconds(0.5f);
+        }
+
+        foreach(Player player in GameController.instance.players)
+        {
+            if(player.currentTileIndex == currentTileIndex && player != this)
+            {
+                player.transform.position -= new Vector3(GetComponent<MeshRenderer>().bounds.size.x * 0.8f, 0f);
+                transform.position += new Vector3(GetComponent<MeshRenderer>().bounds.size.x * 0.8f, 0f);
+            }
         }
 
         if (tileIndex >= TileField.tiles.Length)

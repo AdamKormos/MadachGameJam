@@ -5,10 +5,10 @@ using UnityEngine;
 public static class QuestionsDB
 {
     public const int NotSceneRelated = 0;
-    public const int Memoriter = 17;
+    public const int Memoriter = 16;
 
-    public static List<QuizQuestion>[] questions = new List<QuizQuestion>[18];
-    public static List<QuizQuestion>[] usableQuestions = new List<QuizQuestion>[18];
+    public static List<QuizQuestion>[] questions = new List<QuizQuestion>[17];
+    public static List<QuizQuestion>[] usableQuestions = new List<QuizQuestion>[17];
 
 
     public static void FillDB()
@@ -44,6 +44,11 @@ public static class QuestionsDB
         AddQuestion(6, "Ki kezd el új eszméket hirdetni a szín végén?", 1, new string[] { "Szent Péter", "Péter apostol", "Pál apostol", "Ádám" });
         AddQuestion(6, "Mit jelent a hedonizmus?", 0, new string[] { "Eszmék nélküli világ", "Több eszmével teli világ", "Vallásiasság", "Népuralom" });
 
+        AddQuestion(7, "Milyen szerepet tölt be Ádám a színben?", 0, new string[] { "Kereszteslovag", "Bérmunkás", "Jobbágy", "Uralkodó" });
+        AddQuestion(7, "Mi lesz Évából a színben?", 1, new string[] { "Hadvezér", "Apáca", "Családanya", "Tanító" });
+        AddQuestion(7, "Mit gondol Ádám az itt bemutatott keresztény egyházról?", 3, new string[] { "Támogatja", "Elítéli, mert más vallásban hisz", "Semlegesen áll hozzá", "Elítéli, mert elkorcsosult" });
+
+
 
         for (int i = 0; i < questions.Length; i++)
         {
@@ -70,7 +75,7 @@ public static class QuestionsDB
 
     public static QuizQuestion GetQuestion()
     {
-        int sceneIndex = Random.Range(0, 6); // Temporary -- will be Random.Range(0, 18)
+        int sceneIndex = Random.Range(0, 8); // Temporary -- will be Random.Range(0, 17)
         if (usableQuestions[sceneIndex].Count == 0)
         {
             foreach (QuizQuestion q in questions[sceneIndex])
