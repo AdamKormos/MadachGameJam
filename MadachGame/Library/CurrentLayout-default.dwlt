@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 56
+  controlID: 21
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 556
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 17
+  controlID: 22
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 92
+  controlID: 23
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -507,9 +507,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 64f9ffff7cf9ffff28faffff5cfbffff
+      m_SelectedIDs: bc3c0000923c0000643c0000
+      m_LastClickedID: 15460
+      m_ExpandedIDs: 5cfbffff0c3c0000583c0000643c00007c3c0000923c0000aa3c0000bc3c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -569,9 +569,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 997.28534, y: 587.1571, z: -244.25691}
+    m_Target: {x: 1066.2645, y: 533.5748, z: -263.327}
     speed: 2
-    m_Value: {x: 997.28534, y: 587.1571, z: -244.25691}
+    m_Value: {x: 1066.2645, y: 533.5748, z: -263.327}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -622,9 +622,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 529.93066
+    m_Target: 438.11844
     speed: 2
-    m_Value: 529.93066
+    m_Value: 438.11844
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -715,23 +715,23 @@ MonoBehaviour:
     m_DrawArea:
       serializedVersion: 2
       x: 0
-      y: 0
+      y: 21
       width: 1045
-      height: 552
-    m_Scale: {x: 0.51111114, y: 0.51111114}
-    m_Translation: {x: 522.5, y: 275.99994}
+      height: 531
+    m_Scale: {x: 0.4916667, y: 0.49166667}
+    m_Translation: {x: 522.5, y: 265.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1022.28253
-      y: -539.9999
-      width: 2044.5651
-      height: 1079.9999
+      x: -1062.7118
+      y: -540
+      width: 2125.4236
+      height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.51111114
+  m_defaultScale: 0.49166667
   m_LastWindowPixelSize: {x: 1045, y: 552}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
