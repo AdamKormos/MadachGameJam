@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class QuestionsDB
 {
-    public const int NotSceneRelated = 0;
+    public const int GeneralQuestion = 0;
     public const int Memoriter = 16;
 
     public static List<QuizQuestion>[] questions = new List<QuizQuestion>[17];
@@ -13,11 +13,11 @@ public static class QuestionsDB
 
     public static void FillDB()
     {
-        AddQuestion(0, "Körülbelül mennyi idő alatt írta meg Madách a művet?", 1, new string[] { "3 év", "1 év", "1 évtized", "5 év" });
-        AddQuestion(0, "Mihez hasonlította Arany elhamarkodottan a művet?", 0, new string[] { "Faust", "Rómeó és Júlia", "Egri Csillagok", "Antigoné" });
-        AddQuestion(0, "Melyik NEM jelenik meg a műben?", 3, new string[] { "Eleve elrendeltség", "Hegeli dialektika", "Fagyhalál elmélet", "Ateizmus" });
-        AddQuestion(0, "Mire szánta Madách a művet?", 1, new string[] { "Színdarabokra", "Olvasásra" });
-        AddQuestion(0, "Mi a mű műfaja?", 0, new string[] { "Drámai költemény", "Eposz", "Epikus dráma", "Elégia" });
+        AddQuestion(GeneralQuestion, "Körülbelül mennyi idő alatt írta meg Madách a művet?", 1, new string[] { "3 év", "1 év", "1 évtized", "5 év" });
+        AddQuestion(GeneralQuestion, "Mihez hasonlította Arany elhamarkodottan a művet?", 0, new string[] { "Faust", "Rómeó és Júlia", "Egri Csillagok", "Antigoné" });
+        AddQuestion(GeneralQuestion, "Melyik NEM jelenik meg a műben?", 3, new string[] { "Eleve elrendeltség", "Hegeli dialektika", "Fagyhalál elmélet", "Ateizmus" });
+        AddQuestion(GeneralQuestion, "Mire szánta Madách a művet?", 1, new string[] { "Színdarabokra", "Olvasásra" });
+        AddQuestion(GeneralQuestion, "Mi a mű műfaja?", 0, new string[] { "Drámai költemény", "Eposz", "Epikus dráma", "Elégia" });
         
         AddQuestion(1, "Lucifer szembefordul az Úrral", 0, new string[] { "Igaz", "Hamis" });
         AddQuestion(1, "Minek a fáját adta Isten Lucifernek?", 2, new string[] { "Kételkedés és halhatatlanság", "Tudás és tagadás", "Tudás és halhatatlanság", "Becsmérlés és tagadás" });
@@ -50,6 +50,14 @@ public static class QuestionsDB
 
 
 
+        AddQuestion(Memoriter, "Egészítsd ki: „Be van fejezve a nagy mű, igen. A ___ forog, az alkotó pihen.\"", 2, new string[] { "kép", "mű", "gép", "masina" });
+        AddQuestion(Memoriter, "Egészítsd ki: „Hiányzik az összhangzó ___.\"", 1, new string[] { "érzelem", "értelem", "lételem", "életem" });
+        AddQuestion(Memoriter, "Egészítsd ki: „___, de terhes önlábunkon élni.\"", 2, new string[] { "Helyes", "Feszes", "Nemes", "Rendes" });
+        AddQuestion(Memoriter, "Egészítsd ki: „A __ voltaképp mi is?\"", 0, new string[] { "cél", "vég", "lét", "nép" });
+        AddQuestion(Memoriter, "Egészítsd ki: „___ majdan fajzatom,\"", 3, new string[] { "Halad-e tovább", "Hívő lesz-e", "Hanyatlik-é egyszer", "Megy-é előbbre" });
+        AddQuestion(Memoriter, "Egészítsd ki: „Mondottam ember: küzdj és bízva ___!\"", 1, new string[] { "hívjál", "bízzál", "bírjál" });
+
+
         for (int i = 0; i < questions.Length; i++)
         {
             if (questions[i] == null) continue;
@@ -69,7 +77,7 @@ public static class QuestionsDB
             questions[sceneIndex] = new List<QuizQuestion>();
         }
 
-        questions[sceneIndex].Add(new QuizQuestion(question, answers, correctAnswerIndex));
+        questions[sceneIndex].Add(new QuizQuestion(question, answers, correctAnswerIndex, sceneIndex));
     }
 
 

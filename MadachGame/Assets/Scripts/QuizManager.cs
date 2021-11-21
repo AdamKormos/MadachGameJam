@@ -113,7 +113,7 @@ public class QuizManager : MonoBehaviour
         currentQuestion = QuestionsDB.GetQuestion();
         int answerCount = currentQuestion.answers.Length;
         quizQuestionText.text = currentQuestion.question;
-        quizQuestionSceneImage.sprite = Resources.Load("test-tile", typeof(Sprite)) as Sprite;
+        quizQuestionSceneImage.sprite = Resources.Load(currentQuestion.sceneIndex.ToString(), typeof(Sprite)) as Sprite;
 
         playerNameAboveQuizText.text = ((GameController.Names)targetPlayerIndex).ToString() + " kérdése:";
         playerNameAboveQuizText.color = new Color(playerNameAboveQuizText.color.r, playerNameAboveQuizText.color.g, playerNameAboveQuizText.color.b, 1f);

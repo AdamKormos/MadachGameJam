@@ -29,13 +29,18 @@ public class TileField : MonoBehaviour
             /*
             if (i % 7 == 0)
             {
-                tile.sceneIndex = QuestionsDB.NotSceneRelated;
+                tile.sceneIndex = QuestionsDB.GeneralQuestion;
             }
             else
             {
                 tile.sceneIndex = Random.Range(1, 17);
             }
             */
+
+            if(i % 7 == 0)
+            {
+                tile.GetComponent<SpriteRenderer>().sprite = Resources.Load("mezo2", typeof(Sprite)) as Sprite;
+            }
 
             tile.transform.parent = this.gameObject.transform;
             tile.name = "Tile #" + i.ToString();
@@ -80,7 +85,7 @@ public class TileField : MonoBehaviour
     private Vector3 TileOffset()
     {
         return new Vector3(tileSample.GetComponent<SpriteRenderer>().bounds.size.x * tileSample.transform.lossyScale.x * 1.8f,
-                 tileSample.GetComponent<SpriteRenderer>().bounds.size.y * tileSample.transform.lossyScale.y * 1.2f,
+                 tileSample.GetComponent<SpriteRenderer>().bounds.size.y * tileSample.transform.lossyScale.y * 1.45f,
                  tileSample.GetComponent<SpriteRenderer>().bounds.size.z * tileSample.transform.lossyScale.z);
     }
 }

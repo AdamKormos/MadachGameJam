@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
         {
             if(player.currentTileIndex == currentTileIndex && player != this)
             {
-                player.transform.position -= new Vector3(GetComponent<MeshRenderer>().bounds.size.x * 0.8f, 0f);
-                transform.position += new Vector3(GetComponent<MeshRenderer>().bounds.size.x * 0.8f, 0f);
+                player.transform.position -= new Vector3(GetComponent<SpriteRenderer>().bounds.size.x * 0.5f, 0f);
+                transform.position += new Vector3(GetComponent<SpriteRenderer>().bounds.size.x * 0.5f, 0f);
             }
         }
 
